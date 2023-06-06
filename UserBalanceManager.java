@@ -6,7 +6,7 @@
 
 
 import java.util.Scanner;
-import java.util.Stack;
+
 import java.util.*;
 
 
@@ -14,15 +14,18 @@ public class UserBalanceManager extends BankMain {
 
     private Node head;
       
-    
+    public void start() {
+        System.out.println("============Welcome to the Banking Portal===============");
+        menu();
+    }
+
         // displays menu and directs user to appropriate method
         public void menu() {
             Scanner input = new Scanner(System.in);
 
             System.out.println();
-            System.out.println("FOR EMPLOYEE USE ONLY");
+            System.out.println("----FOR EMPLOYEE USE ONLY----");
             System.out.println();
-            System.out.println("Welcome to the banking portal");
             System.out.println("[1] Add a new user ");
             System.out.println("[2] Find a current user");
             System.out.println("[3] remove a user");
@@ -56,16 +59,20 @@ public class UserBalanceManager extends BankMain {
                 default:
                     System.out.println("invalid entry or menu choice");
                     System.out.println("Please try again");
+                    System.out.println();
                     menu();
                     break;
             }
             System.out.println();
+            
         } // end of menu 
 
         // method for adding a new user
         public void addUser() {
             Scanner input = new Scanner(System.in);
+            System.out.println();
             System.out.println("Please enter the following information of the new user");
+            System.out.println();
             System.out.print("First name: ");
             String firstName = input.nextLine();
             System.out.print("Last name: ");
@@ -94,12 +101,14 @@ public class UserBalanceManager extends BankMain {
 
             // notify user of success
             System.out.println("New user has been added");
-
+            menu();
+            
         } // end addUser
 
         // finds a user by ID number
         public void findUser() {
             Scanner in = new Scanner(System.in);
+            System.out.println();
             System.out.println("Please enter the ID number of the user you wish to find");
             int findID = Integer.parseInt(in.nextLine());
 
@@ -117,6 +126,7 @@ public class UserBalanceManager extends BankMain {
 
             // if it traverses and cannot find user w/ ID, notify user
             if (current == null) {
+                System.out.println();
                 System.out.println("No user found with input ID number");
                 System.out.println("Please try again");
 
@@ -126,32 +136,32 @@ public class UserBalanceManager extends BankMain {
 
             // go back to menu for more options
             menu();
-    
-        } // end findEmployee
+           
+        } // end findUser
 
         // remove user by ID number
         public void removeUser() {
             Scanner input = new Scanner(System.in);
             System.out.print("Enter the ID number of the user to delete: ");
             int deleteID = input.nextInt();
-
+            
             // if directory is empty -> notify user
             if (head == null) {
+                System.out.println();
                 System.out.println("There are no current users at this time");
                 return;
             }
 
-            Node previous = head;
-            Node current = head.getNext();
-
             // if ID's match a current user, remove user
-            if (current.getUserObject().getNumberID() == deleteID) {
+            if (head.getUserObject().getNumberID() == deleteID) {
                 head = head.getNext();
+                System.out.println();
                 System.out.println("User has been deleted");
                 return;
-            }
+            } 
 
-           
+            Node previous = head;
+            Node current = head.getNext();
 
             // adjust for removing a user from the linked list
             while (current != null) {
@@ -160,11 +170,12 @@ public class UserBalanceManager extends BankMain {
                     return;
                 }
                 previous = current;
-                current = current.getNext();            
+                current = current.getNext();
             }
 
             // if no matching ID was found after searching through linked list: 
             if (current == null) {
+            System.out.println();
             System.out.println("There is no current user with the input ID number");
             System.out.println("Please try again");
             removeUser();
@@ -172,17 +183,18 @@ public class UserBalanceManager extends BankMain {
 
             // back to menu for other options
             menu();
-        }
+        } // end removeuser
 
         // find the user by ID number for deposit
         public void startDeposit() {
             Scanner in = new Scanner(System.in);
-            System.out.println("Please enter the ID number of the user you wish to find");
+            System.out.println("Please enter the ID number of the user of which to make a deposit");
             int depositID = Integer.parseInt(in.nextLine());
 
             Node current = head;
             while (current != null) {
                 if (current.getUserObject().getNumberID() == depositID) {
+                    System.out.println();
                     System.out.println("The users current information and balance is:");
                     System.out.println(current.getUserObject().toString());
                     current.getUserObject().getBalance();
@@ -196,37 +208,40 @@ public class UserBalanceManager extends BankMain {
 
             // try again if ID does not match current users
             if (current == null) {
+                System.out.println();
                 System.out.println("No user found with input ID number");
                 System.out.println("Please try again");
                 startDeposit();
             }
 
             menu();
-
-        }
+           
+        } // end startDeposit
 
         // deposits set amount in a users account
         public void deposit(Node current) {
             Scanner input = new Scanner(System.in);
             System.out.println("how much would you like to deposit: ");
             double depAmount = input.nextDouble();
-
-
-           current.getUserObject().setBalance(current.getUserObject().getBalance() + depAmount);
             
-
+            // set new balance for user by adding deposit amount
+            current.getUserObject().setBalance(current.getUserObject().getBalance() + depAmount);
+            
+            System.out.println();
             System.out.println("deposit has been made");
             menu();
-        }
+        } // end deposit
 
             public void startWithdraw() {
             Scanner in = new Scanner(System.in);
-            System.out.println("Please enter the ID number of the user you wish to find");
+            System.out.println("Please enter the ID number of the user of which to make a withdrawl");
             int depositID = Integer.parseInt(in.nextLine());
 
+            
             Node current = head;
             while (current != null) {
                 if (current.getUserObject().getNumberID() == depositID) {
+                    System.out.println();
                     System.out.println("The users current information and balance is:");
                     System.out.println(current.getUserObject().toString());
                     withdraw(current);
@@ -242,25 +257,22 @@ public class UserBalanceManager extends BankMain {
             }
 
             menu();
-        }
+            
+        } // end start withdrawl
 
+        // withdrawl method
         public void withdraw(Node current) {
             Scanner input = new Scanner(System.in);
             System.out.println("how much would you like to withdraw: ");
             double withAmount = input.nextDouble();
 
-           current.getUserObject().setBalance(current.getUserObject().getBalance() - withAmount);
+            // set new balance by subtracting withdrawl amount
+            current.getUserObject().setBalance(current.getUserObject().getBalance() - withAmount);
             
-
-            System.out.println("deposit has been made");
+            System.out.println();
+            System.out.println("withdrawl has been made");
             menu();
-
-        }
-
-
-      //  public UserObject userInformation() {
-
-      //  }
+        } // end of withdrawl
 
     } // end of class 
 

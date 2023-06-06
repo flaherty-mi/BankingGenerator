@@ -55,7 +55,7 @@ public class UserObject extends BankMain{
 
     public void setFirstName(String firstName) {
         this.firstName = firstName; 
-    }
+    } 
 
     public void setLastName(String lastName) {
         this.lastName = lastName; 
@@ -74,7 +74,7 @@ public class UserObject extends BankMain{
     public String toString() {
         return ("Name: " + lastName + ", " + firstName + "\n" +
                 "ID: " + numberID + "\n" + 
-                "Account Balance: " + balance + "\n");
+                "Account Balance: $" + balance + "\n");
     }
 
 }
