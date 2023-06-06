@@ -1,16 +1,14 @@
+// Meghan Flaherty
+// CS145
+// class to create Node
 
 
 
-
-
-
-
-
-package AssignmentIII.src.BankMain;
 
 
 public class Node extends BankMain{
 
+    // initializing object node
     private UserObject user;
     private Node next;
 
@@ -19,7 +17,9 @@ public class Node extends BankMain{
         this.next = null;
     }
 
-    public userObject getUser() {
+    // getters + setters for iterating through linked list
+
+    public UserObject getUserObject() {
         return user;
     }
     
@@ -35,4 +35,4 @@ public class Node extends BankMain{
         this.next = next;
     }
 
-}
+} // end Node class

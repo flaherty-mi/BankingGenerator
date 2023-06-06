@@ -5,7 +5,6 @@
 
 import java.util.LinkedList;
 
-package AssignmentIII.src;
 
 public class UserObject extends BankMain{
 
@@ -18,7 +17,7 @@ public class UserObject extends BankMain{
 
     LinkedList<UserObject> user = new LinkedList<>();
 
-    public UserObject(String firstName, String lastName, int numberID, int balance) {
+    public UserObject(String firstName, String lastName, int numberID, double balance) {
 
         UserObject.next = null;
 

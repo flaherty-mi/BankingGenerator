@@ -1,8 +1,11 @@
+// Meghan Flaherty
+//CS145
+// Main class
 
 
 
-
-package AssignmentIII.src;
+import java.util.LinkedList;
+import java.util.*;
 
 
 public class BankMain {
